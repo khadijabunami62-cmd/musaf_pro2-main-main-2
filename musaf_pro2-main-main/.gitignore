@@ -9,7 +9,8 @@
 .buildlog/
 .history
 .svn/
-.env/
+.env
+open_ai/.env
 .swiftpm/
 migrate_working_dir/
 
