@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:musaf_pro/screens/notifications_screen.dart';
 import 'package:musaf_pro/widgets/custom_button.dart';
 import 'package:musaf_pro/screens/settings_screen.dart';
+import 'package:musaf_pro/screens/wound_screen.dart';
+
 
 // 🚀 استيرادات الصفحات الجديدة
 import 'package:musaf_pro/screens/patient_sos_page.dart';
@@ -429,11 +431,16 @@ class _PatientHomeScreenState extends State<PatientHomeScreen>
         height: 55,
         child: FloatingActionButton(
           onPressed: () {
-            debugPrint("فتح الكاميرا للمسح الذكي");
-          },
-          backgroundColor: musafRed,
-          shape: const CircleBorder(),
-          child: const Icon(Icons.camera_alt, color: Colors.white, size: 24),
+            Navigator.push(
+        context,
+        MaterialPageRoute( 
+          builder: (context) => const HomePage(),// تأكدي أن اسم الكلاس في صفحتك wound_screen هو WoundScreen
+        ),
+      );
+    },
+    backgroundColor: musafRed,
+    shape: const CircleBorder(),
+    child: const Icon(Icons.camera_alt, color: Colors.white, size: 24),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

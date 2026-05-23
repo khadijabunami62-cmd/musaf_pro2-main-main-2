@@ -20,6 +20,8 @@ import 'package:musaf_pro/screens/patient_home_screen.dart';
 import 'package:musaf_pro/screens/caregiver_home_screen.dart';
 import 'package:musaf_pro/screens/health_vitals_screen.dart';
 import 'package:musaf_pro/screens/medications_screen.dart';
+import 'package:musaf_pro/screens/wound_screen.dart';
+
 
 // 🚀 إضافة استيراد صفحة الأدوية اليومية الجديدة
 import 'package:musaf_pro/screens/daily_medications_list_screen.dart';
