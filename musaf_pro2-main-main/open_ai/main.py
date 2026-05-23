@@ -1,6 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
-from dotenv import load_dotenv
 from openai import OpenAI
 import os
 import base64
@@ -8,9 +7,23 @@ import asyncio
 import json
 
 # تحميل المتغيرات من ملف .env
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# 1. استبدلي سطر الاستيراد بـ try-except لضمان عدم توقف الكود إذا لم تجد المكتبة
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
+# هذا السطر هو الأهم: سيجلب المفتاح من بيئة Render إذا لم يجد ملف .env
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    # هذا سيظهر في Logs في Render ليخبركِ أن المتغير غير مقروء
+    print("⚠️ خطأ: OPENAI_API_KEY غير موجود!")
+else:
+    print("✅ تم العثور على المفتاح بنجاح")
+
+client = OpenAI(api_key=api_key)
 app = FastAPI()
 
 @app.get("/")
@@ -287,4 +300,5 @@ async def chat_with_ai(data: dict):
             headers={"Content-Type": "application/json; charset=utf-8"}
         )
     except Exception as e:
+        print(f"❌ خطأ فادح أثناء التحليل: {str(e)}")
         return JSONResponse({"error": str(e)}, status_code=500)
